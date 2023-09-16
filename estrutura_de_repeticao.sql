@@ -1,23 +1,59 @@
 DO $$
-DECLARE
-	nota INT;
-	media NUMERIC(10, 2) := 0;
-	contador INT := 0;
-BEGIN
-	SELECT valor_aleatorio_entre(0, 11) -1 INTO nota;
-	WHILE nota >= 0 LOOP
-		RAISE NOTICE '%', nota;
-		media := media + nota; --acumulador 
-		contador := contador + 1;
-		SELECT valor_aleatorio_entre(0, 11) -1 INTO nota;
+BEGIN 
+	--GErando notas 
+	FOR i IN 1..100 LOOP
+	INSERT INTO tb_aluno (nota) values (valor_aleatorio_entre(0,10);
 	END LOOP;
-	IF contador > 0 THEN -- se tem pelo menos uma nota 
-		RAISE NOTICE 'MEdia: %', media/ contador;
-	ELSE 
-		RAISE NOTICE 'Nenhuma nota gerada';
-	END IF;
 END;
 $$
+
+-- CREATE TABLE tb_aluno(
+-- 	cod_aluno SERIAL PRIMARY KEY,
+-- 	nota INT	
+-- );
+
+-- DO $$
+-- BEGIN 
+-- 	FOR i IN 1..10 LOOP
+-- 		RAISE NOTICE '%', i;
+-- 	END LOOP;
+	
+-- 	FOR i IN 10..1 LOOP
+-- 		RAISE NOTICE '%', i;
+-- 	END LOOP;
+	
+-- 	FOR i IN REVERSE 10..1 LOOP
+-- 		RAISE NOTICE '%', i;
+-- 	END LOOP;
+	
+-- 	FOR i IN 1..50 BY 2 LOOP
+-- 		RAISE NOTICE '%', i;
+-- 	END LOOP;
+-- END;
+-- $$
+
+
+
+-- DO $$
+-- DECLARE
+-- 	nota INT;
+-- 	media NUMERIC(10, 2) := 0;
+-- 	contador INT := 0;
+-- BEGIN
+-- 	SELECT valor_aleatorio_entre(0, 11) -1 INTO nota;
+-- 	WHILE nota >= 0 LOOP
+-- 		RAISE NOTICE '%', nota;
+-- 		media := media + nota; --acumulador 
+-- 		contador := contador + 1;
+-- 		SELECT valor_aleatorio_entre(0, 11) -1 INTO nota;
+-- 	END LOOP;
+-- 	IF contador > 0 THEN -- se tem pelo menos uma nota 
+-- 		RAISE NOTICE 'MEdia: %', media/ contador;
+-- 	ELSE 
+-- 		RAISE NOTICE 'Nenhuma nota gerada';
+-- 	END IF;
+-- END;
+-- $$
 
 -- DO $$
 -- DECLARE 
