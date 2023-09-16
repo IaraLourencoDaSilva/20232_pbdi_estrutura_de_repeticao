@@ -1,11 +1,30 @@
 DO $$
-BEGIN 
-	--GErando notas 
-	FOR i IN 1..100 LOOP
-	INSERT INTO tb_aluno (nota) values (valor_aleatorio_entre(0,10);
+DECLARE
+	--RECORD: tipo para representar uma linha de uma linha 
+	aluno RECORD ;
+	media NUMERIC(10, 2) := 0;
+	total INT;
+BEGIN
+	FOR aluno IM
+		SELECT * FROM tb_aluno 	
+	LOOP
+		--. é o operador de acesso a membro
+		RAISE NOTICE 'Nota : %',aluno.cod_aluno, aluno.nota;
 	END LOOP;
 END;
 $$
+
+
+-- SELECT * FROM tb_aluno
+
+-- DO $$
+-- BEGIN 
+-- 	--GErando notas 
+-- 	FOR i IN 1..100 LOOP
+-- 	INSERT INTO tb_aluno (nota) values (valor_aleatorio_entre(0,10);
+-- 	END LOOP;
+-- END;
+-- $$
 
 -- CREATE TABLE tb_aluno(
 -- 	cod_aluno SERIAL PRIMARY KEY,
