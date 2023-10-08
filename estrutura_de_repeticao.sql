@@ -1,18 +1,81 @@
+-- FOREACH usando slices (fatias)
 DO $$
 DECLARE
-	--RECORD: tipo para representar uma linha de uma linha 
-	aluno RECORD ;
-	media NUMERIC(10, 2) := 0;
-	total INT;
-BEGIN
-	FOR aluno IM
-		SELECT * FROM tb_aluno 	
-	LOOP
-		--. é o operador de acesso a membro
-		RAISE NOTICE 'Nota : %',aluno.cod_aluno, aluno.nota;
+	vetor INT[] := ARRAY[1,2,3];
+	matriz INT[] := ARRAY[
+		[1,2,3],
+		[4,5,6],
+		[7,8,9]
+	];
+	var_aux INT;
+	vet_aux INT[];
+BEGIN 
+	RAISE NOTICE 'slide igual a 0';
+	FOREACH var_aux IN ARRAY vetor LOOP
+		RAISE NOTICE '%', var_aux;
+	END LOOP;
+	RAISE NOTICE '-------------------------';
+	RAISE NOTICE 'Slice igual a 1 sobre vetor';
+	FOREACH vet_aux SLICE 1 IN ARRAY vetor LOOP
+		RAISE NOTICE '%', vet_aux;
+		FOREACH var_aux IN ARRAY vet_aux LOOP
+			RAISE NOTICE '%', var_aux; 
+		END LOOP;
+	END LOOP;
+	RAISE NOTICE '-------------------------';
+	RAISE NOTICE 'matriz, slice 0';
+	FOREACH var_aux IN ARRAY matriz LOOP 
+		RAISE NOTICE '%', var_aux;
+	END LOOP;
+	RAISE NOTICE 'matriz, slice 1';
+	FOREACH vet_aux SLICE 1 IN ARRAY matriz LOOP
+		RAISE NOTICE '%', vet_aux;
+	END LOOP;
+	RAISE NOTICE 'matriz, slice 2';
+	FOREACH vet_aux SLICE 2 IN ARRAY matriz LOOP
+		RAISE NOTICE '%', vet_aux;
 	END LOOP;
 END;
 $$
+
+
+-- -- foreach, iterando sobre os elementos de um array
+-- DO 
+-- $$
+-- DECLARE 
+-- 	valores INT[] := ARRAY[
+-- 		valor_aleatorio_entre(1,10),
+-- 		valor_aleatorio_entre(1,10),
+-- 		valor_aleatorio_entre(1,10),
+-- 		valor_aleatorio_entre(1,10),
+-- 		valor_aleatorio_entre(1,10)
+-- 	];
+-- 	valor INT;
+-- 	soma INT := 0;
+-- BEGIN 
+-- 	FOREACH valor IN ARRAY valores LOOP
+-- 		RAISE NOTICE 'Valor da vez: %', valor;
+-- 		soma := soma + valor;
+-- 	END LOOP;
+-- 	RAISE NOTICE 'Soma: %', soma;
+-- END;
+-- $$
+
+-- DO $$
+-- DECLARE
+-- 	--RECORD: tipo para representar uma linha de uma linha 
+-- 	aluno RECORD ;
+-- 	media NUMERIC(10, 2) := 0;
+-- 	total INT;
+-- BEGIN
+-- 	FOR aluno IM
+-- 		SELECT * FROM tb_aluno 	
+-- 	LOOP
+-- 		--. é o operador de acesso a membro
+-- 		RAISE NOTICE 'Nota : %',aluno.cod_aluno, aluno.nota;
+-- 	END LOOP;
+-- END;
+-- $$
 
 
 -- SELECT * FROM tb_aluno
