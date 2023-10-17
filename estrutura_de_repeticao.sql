@@ -1,32 +1,54 @@
 --Exercio
 --1.1 Resolva cada exercício a seguir usando LOOP, WHILE, FOR e FOREACH. Quando o enunciado disser que é preciso “ler” algum valor, gere-o aleatoriamente.
 
---segunda link 
-CREATE OR REPLACE FUNCTION count_positive_numbers() RETURNS VOID AS 
-
+--terceira link
+CREATE OR REPLACE FUNCTION sum_of_odds_between(X INT, Y INT) RETURNS INT AS 
 DO $$
 DECLARE
-    num_count INT := 0;
-    i INT := 1;
-    input_number NUMERIC;
+    sum_of_odds INT := 0;
+    i INT;
 BEGIN
-    WHILE i <= 6 LOOP
-        -- Read the input number
-        input_number := valor_aleatorio_entre(-10, 10); -- Replace with your method of reading input
-
-        RAISE NOTICE 'Input number: %', input_number;
-
-        -- Check if the number is positive
-        IF input_number > 0 THEN
-            num_count := num_count + 1;
-        END IF;
-
-        i := i + 1;
+    FOR i IN 1..6 LOOP
+        -- Generate a random number between X and Y
+        DECLARE
+            random_num INT := valor_aleatorio_entre(1, 100);
+        BEGIN
+            RAISE NOTICE 'Generated number: %', random_num;
+            IF random_num % 2 <> 0 THEN
+                sum_of_odds := sum_of_odds + random_num;
+            END IF;
+        END;
     END LOOP;
-
-    RAISE NOTICE 'Total positive numbers: %', num_count;
 END;
 $$ LANGUAGE plpgsql;
+
+
+--segunda link 
+-- CREATE OR REPLACE FUNCTION count_positive_numbers() RETURNS VOID AS 
+
+-- DO $$
+-- DECLARE
+--     num_count INT := 0;
+--     i INT := 1;
+--     input_number NUMERIC;
+-- BEGIN
+--     WHILE i <= 6 LOOP
+--         -- Read the input number
+--         input_number := valor_aleatorio_entre(-10, 10); -- Replace with your method of reading input
+
+--         RAISE NOTICE 'Input number: %', input_number;
+
+--         -- Check if the number is positive
+--         IF input_number > 0 THEN
+--             num_count := num_count + 1;
+--         END IF;
+
+--         i := i + 1;
+--     END LOOP;
+
+--     RAISE NOTICE 'Total positive numbers: %', num_count;
+-- END;
+-- $$ LANGUAGE plpgsql;
 
 
 --primeiro link 
