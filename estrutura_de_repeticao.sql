@@ -1,53 +1,84 @@
 --Exercio
 --1.1 Resolva cada exercício a seguir usando LOOP, WHILE, FOR e FOREACH. Quando o enunciado disser que é preciso “ler” algum valor, gere-o aleatoriamente.
-
---quarta link
-CREATE OR REPLACE FUNCTION print_sequence_and_sum() RETURNS VOID AS 
-
-DO $$
+--1.2 Faça um programa que calcule o determinante de uma matriz quadrada de ordem 3 utilizando a regra de Sarrus. Veja a regra aqui:
+CREATE OR REPLACE FUNCTION determinante_matriz_3x3() RETURNS NUMERIC AS $$
 DECLARE
-    m INT;
-    n INT;
-    smallest INT;
-    largest INT;
-    i INT;
-    sum INT;
+    a NUMERIC;
+    b NUMERIC;
+    c NUMERIC;
+    d NUMERIC;
+    e NUMERIC;
+    f NUMERIC;
+    g NUMERIC;
+    h NUMERIC;
+    i NUMERIC;
+    determinant NUMERIC;
 BEGIN
-    LOOP
-        -- Read the pair of values M and N
-        m := valor_aleatorio_entre(1, 100);  -- You can replace this with your method of reading input
-        n := valor_aleatorio_entre(1, 100);  -- You can replace this with your method of reading input
+    -- Leitura dos elementos da matriz
+    a := valor_aleatorio_entre(1, 12); -- Substitua por seus próprios valores ou método de entrada.
+    b := valor_aleatorio_entre(1, 12);
+    c := valor_aleatorio_entre(1, 12);
+    d := valor_aleatorio_entre(1, 12);
+    e := valor_aleatorio_entre(1, 12);
+    f := valor_aleatorio_entre(1, 12);
+    g := valor_aleatorio_entre(1, 12);
+    h := valor_aleatorio_entre(1, 12);
+    i := valor_aleatorio_entre(1, 12);
 
-        -- Check if any value is zero or negative
-        IF m <= 0 OR n <= 0 THEN
-            EXIT;
-        END IF;
+    -- Cálculo do determinante pela regra de Sarrus
+    determinant := (a * e * i) + (b * f * g) + (c * d * h) - (g * e * c) - (h * f * a) - (i * d * b);
 
-        -- Determine the smallest and largest values
-        IF m < n THEN
-            smallest := m;
-            largest := n;
-        ELSE
-            smallest := n;
-            largest := m;
-        END IF;
-
-        -- Initialize the sum
-        sum := 0;
-
-        -- Print the sequence from the smallest to the largest and calculate the sum
-        FOR i IN smallest..largest LOOP
-            RAISE NOTICE '%', i;
-            sum := sum + i;
-        END LOOP;
-
-        RAISE NOTICE 'Sum=%', sum;
-    END LOOP;
+    RETURN determinant;
 END;
 $$ LANGUAGE plpgsql;
 
--- Example usage (replace this with your method of reading input):
-SELECT print_sequence_and_sum();
+
+
+--quarta link
+-- CREATE OR REPLACE FUNCTION print_sequence_and_sum() RETURNS VOID AS 
+
+-- DO $$
+-- DECLARE
+--     m INT;
+--     n INT;
+--     smallest INT;
+--     largest INT;
+--     i INT;
+--     sum INT;
+-- BEGIN
+--     LOOP
+--         -- Read the pair of values M and N
+--         m := valor_aleatorio_entre(1, 20);  -- You can replace this with your method of reading input
+--         n := valor_aleatorio_entre(1, 20);  -- You can replace this with your method of reading input
+
+--         -- Check if any value is zero or negative
+--         IF m <= 0 OR n <= 0 THEN
+--             EXIT;
+--         END IF;
+
+--         -- Determine the smallest and largest values
+--         IF m < n THEN
+--             smallest := m;
+--             largest := n;
+--         ELSE
+--             smallest := n;
+--             largest := m;
+--         END IF;
+
+--         -- Initialize the sum
+--         sum := 0;
+
+--         -- Print the sequence from the smallest to the largest and calculate the sum
+--         FOR i IN smallest..largest LOOP
+--             RAISE NOTICE '%', i;
+--             sum := sum + i;
+--         END LOOP;
+
+--         RAISE NOTICE 'Sum=%', sum;
+--     END LOOP;
+-- END;
+-- $$ LANGUAGE plpgsql;
+
 
 
 --terceira link
