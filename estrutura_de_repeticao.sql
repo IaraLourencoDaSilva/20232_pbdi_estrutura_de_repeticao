@@ -1,19 +1,47 @@
 --Exercio
 --1.1 Resolva cada exercício a seguir usando LOOP, WHILE, FOR e FOREACH. Quando o enunciado disser que é preciso “ler” algum valor, gere-o aleatoriamente.
 
---primeiro link 
+--segunda link 
+CREATE OR REPLACE FUNCTION count_positive_numbers() RETURNS VOID AS 
+
 DO $$
 DECLARE
-    num INT;
+    num_count INT := 0;
+    i INT := 1;
+    input_number NUMERIC;
 BEGIN
-    FOR i IN 1..100 LOOP
-        num := valor_aleatorio_entre(1, 100);
-        IF num % 2 = 0 THEN
-            RAISE NOTICE '%', num;
+    WHILE i <= 6 LOOP
+        -- Read the input number
+        input_number := valor_aleatorio_entre(-10, 10); -- Replace with your method of reading input
+
+        RAISE NOTICE 'Input number: %', input_number;
+
+        -- Check if the number is positive
+        IF input_number > 0 THEN
+            num_count := num_count + 1;
         END IF;
+
+        i := i + 1;
     END LOOP;
+
+    RAISE NOTICE 'Total positive numbers: %', num_count;
 END;
-$$ 
+$$ LANGUAGE plpgsql;
+
+
+--primeiro link 
+-- DO $$
+-- DECLARE
+--     num INT;
+-- BEGIN
+--     FOR i IN 1..100 LOOP
+--         num := valor_aleatorio_entre(1, 100);
+--         IF num % 2 = 0 THEN
+--             RAISE NOTICE '%', num;
+--         END IF;
+--     END LOOP;
+-- END;
+-- $$ 
 
 
 
