@@ -1,26 +1,75 @@
 --Exercio
 --1.1 Resolva cada exercício a seguir usando LOOP, WHILE, FOR e FOREACH. Quando o enunciado disser que é preciso “ler” algum valor, gere-o aleatoriamente.
 
---terceira link
-CREATE OR REPLACE FUNCTION sum_of_odds_between(X INT, Y INT) RETURNS INT AS 
+--quarta link
+CREATE OR REPLACE FUNCTION print_sequence_and_sum() RETURNS VOID AS 
+
 DO $$
 DECLARE
-    sum_of_odds INT := 0;
+    m INT;
+    n INT;
+    smallest INT;
+    largest INT;
     i INT;
+    sum INT;
 BEGIN
-    FOR i IN 1..6 LOOP
-        -- Generate a random number between X and Y
-        DECLARE
-            random_num INT := valor_aleatorio_entre(1, 100);
-        BEGIN
-            RAISE NOTICE 'Generated number: %', random_num;
-            IF random_num % 2 <> 0 THEN
-                sum_of_odds := sum_of_odds + random_num;
-            END IF;
-        END;
+    LOOP
+        -- Read the pair of values M and N
+        m := valor_aleatorio_entre(1, 100);  -- You can replace this with your method of reading input
+        n := valor_aleatorio_entre(1, 100);  -- You can replace this with your method of reading input
+
+        -- Check if any value is zero or negative
+        IF m <= 0 OR n <= 0 THEN
+            EXIT;
+        END IF;
+
+        -- Determine the smallest and largest values
+        IF m < n THEN
+            smallest := m;
+            largest := n;
+        ELSE
+            smallest := n;
+            largest := m;
+        END IF;
+
+        -- Initialize the sum
+        sum := 0;
+
+        -- Print the sequence from the smallest to the largest and calculate the sum
+        FOR i IN smallest..largest LOOP
+            RAISE NOTICE '%', i;
+            sum := sum + i;
+        END LOOP;
+
+        RAISE NOTICE 'Sum=%', sum;
     END LOOP;
 END;
 $$ LANGUAGE plpgsql;
+
+-- Example usage (replace this with your method of reading input):
+SELECT print_sequence_and_sum();
+
+
+--terceira link
+-- CREATE OR REPLACE FUNCTION sum_of_odds_between(X INT, Y INT) RETURNS INT AS 
+-- DO $$
+-- DECLARE
+--     sum_of_odds INT := 0;
+--     i INT;
+-- BEGIN
+--     FOR i IN 1..6 LOOP
+--         -- Generate a random number between X and Y
+--         DECLARE
+--             random_num INT := valor_aleatorio_entre(1, 100);
+--         BEGIN
+--             RAISE NOTICE 'Generated number: %', random_num;
+--             IF random_num % 2 <> 0 THEN
+--                 sum_of_odds := sum_of_odds + random_num;
+--             END IF;
+--         END;
+--     END LOOP;
+-- END;
+-- $$ LANGUAGE plpgsql;
 
 
 --segunda link 
