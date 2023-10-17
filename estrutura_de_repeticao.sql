@@ -1,20 +1,39 @@
---Exemplo de tratar erro 
+--Exercio
+--1.1 Resolva cada exercício a seguir usando LOOP, WHILE, FOR e FOREACH. Quando o enunciado disser que é preciso “ler” algum valor, gere-o aleatoriamente.
+
+--primeiro link 
 DO $$
-DECLARE 
-	a INT := valor_aleatorio_entre(0,5);
+DECLARE
+    num INT;
 BEGIN
-	IF a = 0 THEN
-		RAISE 'a não pode ser zero';
-		RAISE NOTICE 'Vejamos se chega aqui...';
-	ELSE
-		RAISE NOTICE 'Valor de a: %', a;
-	END IF;
-EXCEPTION WHEN OTHERS THEN
-	--SQLState é o código da exceção
-	--SQLERRM é a mensagem (SQL Error Message)
-	RAISE NOTICE 'SQLState: %, SQLERRM: %', SQLSTATE, SQLERRM;
+    FOR i IN 1..100 LOOP
+        num := valor_aleatorio_entre(1, 100);
+        IF num % 2 = 0 THEN
+            RAISE NOTICE '%', num;
+        END IF;
+    END LOOP;
 END;
-$$
+$$ 
+
+
+
+--Exemplo de tratar erro 
+-- DO $$
+-- DECLARE 
+-- 	a INT := valor_aleatorio_entre(0,5);
+-- BEGIN
+-- 	IF a = 0 THEN
+-- 		RAISE 'a não pode ser zero';
+-- 		RAISE NOTICE 'Vejamos se chega aqui...';
+-- 	ELSE
+-- 		RAISE NOTICE 'Valor de a: %', a;
+-- 	END IF;
+-- EXCEPTION WHEN OTHERS THEN
+-- 	--SQLState é o código da exceção
+-- 	--SQLERRM é a mensagem (SQL Error Message)
+-- 	RAISE NOTICE 'SQLState: %, SQLERRM: %', SQLSTATE, SQLERRM;
+-- END;
+-- $$
 
 -- --Tratar um erro 
 -- DO $$
